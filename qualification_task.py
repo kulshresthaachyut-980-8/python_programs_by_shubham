@@ -4,14 +4,17 @@ import json
 all_students = []
 
 while True:
-    print("\n--- Main Menu ---")
+    print("\n------ Main Menu ------")
     print("Press 1 for Registration")
-    print("Press 2 for Exit")
-    print("Press 3 to View All Students")
+    print("Press 2 for Search & View Data")
+    print("Press 3 for All Students Data")
+    print("Press 4 for Search only")
+    print("Press 5 for Exit")
     
-    inp_ut = input("Press Key function you want to use : ")
+    choice = input("Press Key function you want to use : ")
+    user_input=int(choice)
     
-    if inp_ut == '1':
+    if user_input == 1:
         print("\n---------------- REGISTER NEW STUDENT ------------------")
         
         student_record = {}
@@ -42,16 +45,34 @@ while True:
         
         print(f"\n Student {student_record['name']} successfully registered!")
 
-    elif inp_ut == '2':
-        print("Exiting program...!")
-        break
+    elif user_input == 2:
+        student_id=input("Enter student Id -: ")
+        student_name=input("Enter Student Name -: ")
+        for data in all_students:
+            if student_id == data["id"] and student_name==data["name"]:
+                print("-------------Student Data ------------ ")
+                print(json.dumps(data,indent=4))
+        else:
+            print("Student Data Not Found !")
         
-    elif inp_ut == '3':
+    elif user_input == 3:
         print("\n---------------- ALL REGISTERED STUDENTS ------------------")
         
         for student in all_students:
             print(json.dumps(student,indent=4))
-                
+   
+    elif user_input==4:
+        check_id=input("Enter Id For Student Search : ")
+        for id in all_students:
+            if check_id==id["id"]:
+                print("Valid Student")
+            else:
+                print("Not Found") 
+             
+    elif user_input==5:
+        print("Exiting program...!")
+        break
+    
     else:
         print("Invalid input. Please try again.")
     
